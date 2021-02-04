@@ -1,4 +1,4 @@
-# menigame-example
+# minigame-example
 A stripped-down minigame pulled from the code I use for my minigames at https://joshpowlison.com/minigames
 
 The goal is to help you learn how to get started creating web games with data shared between JS and C compiled to WASM.
