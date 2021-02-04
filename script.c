@@ -181,20 +181,3 @@ void loop(float sDeltaTime){
 	// If jumping, hold the moving frame
 	} else eFrame[ENTITY_ID_ME] = 35.0f;
 }
-
-// Used to let JS point to the data in WASM
-int* getDataPointer(int type){
-	switch(type){
-		case 0:		return &eActive[0];
-		case 1:		return &eType[0];
-		case 2:		return &eX[0];
-		case 3:		return &eY[0];
-		case 4:		return &eSpeedX[0];
-		case 5:		return &eSpeedY[0];
-		case 6:		return &eGraphic[0];
-		case 7:		return &eFrame[0];
-		case 8:		return &eFlip[0];
-		case 9:		return &settings[0];
-		default:	return 0;
-	}
-}

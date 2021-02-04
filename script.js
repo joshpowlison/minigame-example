@@ -34,7 +34,7 @@ var lastFrameTimestamp	= 0;	// Needed for calculating time between frames in the
 // The Loop
 function onAnimationFrame(frameTimestamp) {
 	// Run the WASM loop, passing in a deltaTime based on seconds
-	WASM.exports.loop((frameTimestamp - lastFrameTimestamp) / 1000);
+	WASM.loop((frameTimestamp - lastFrameTimestamp) / 1000);
 	
 	// Updates the state of the button inputs, transitioning them from "just pressed" to "pressed" and "just released" to "released" if necessary
 	updateInputState(SETTING_INPUT_ACTION);
@@ -127,22 +127,22 @@ fetch('script.wasm',{headers:{'Content-Type':'application/wasm'}})
 .then(response => response.arrayBuffer())
 .then(bits => WebAssembly.instantiate(bits))
 .then(async function(obj){
-	WASM = obj.instance;	// Put the WASM instance into a global variable
-	WASM.exports.main();	// Run the WASM's "main" function
+	WASM = obj.instance.exports;	// Put the WASM instance into a global variable
+	WASM.main();					// Run the WASM's "main" function
 	
-	// Share entity data
-	entities.active		= new Int32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(0),ENTITY_MAX);
-	entities.type		= new Int32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(1),ENTITY_MAX);
-	entities.x			= new Float32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(2),ENTITY_MAX);
-	entities.y			= new Float32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(3),ENTITY_MAX);
-	entities.speedX		= new Float32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(4),ENTITY_MAX);
-	entities.speedY		= new Float32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(5),ENTITY_MAX);
-	entities.graphic	= new Int32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(6),ENTITY_MAX);
-	entities.frame		= new Float32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(7),ENTITY_MAX);
-	entities.flip		= new Int32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(8),ENTITY_MAX);
+	// Share entity data; we can call an array's position in memory via WASM.arrayName.value
+	entities.active		= new Int32Array(WASM.memory.buffer,WASM.eActive.value,ENTITY_MAX);
+	entities.type		= new Int32Array(WASM.memory.buffer,WASM.eType.value,ENTITY_MAX);
+	entities.x			= new Float32Array(WASM.memory.buffer,WASM.eX.value,ENTITY_MAX);
+	entities.y			= new Float32Array(WASM.memory.buffer,WASM.eY.value,ENTITY_MAX);
+	entities.speedX		= new Float32Array(WASM.memory.buffer,WASM.eSpeedX.value,ENTITY_MAX);
+	entities.speedY		= new Float32Array(WASM.memory.buffer,WASM.eSpeedY.value,ENTITY_MAX);
+	entities.graphic	= new Int32Array(WASM.memory.buffer,WASM.eGraphic.value,ENTITY_MAX);
+	entities.frame		= new Float32Array(WASM.memory.buffer,WASM.eFrame.value,ENTITY_MAX);
+	entities.flip		= new Int32Array(WASM.memory.buffer,WASM.eFlip.value,ENTITY_MAX);
 	
 	// Share settings data
-	settings			= new Int32Array(WASM.exports.memory.buffer,WASM.exports.getDataPointer(9),ENTITY_MAX);
+	settings			= new Int32Array(WASM.memory.buffer,WASM.getDataPointer(9),ENTITY_MAX);
 	
 	// Start the game loop, which happens on every animation frame
 	window.requestAnimationFrame(onAnimationFrame);

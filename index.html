@@ -4,7 +4,8 @@
 		<style>
 			#canvas{
 				/* Needed, or else the canvas will look blurry*/
-				image-rendering:pixelated;
+				image-rendering:pixelated;		/* Chromium */
+				image-rendering:crisp-edges;	/* Firefox */
 
 				/* Makes the canvas bigger, but doesn't let it extend past the window's sides */
 				width:40em;
