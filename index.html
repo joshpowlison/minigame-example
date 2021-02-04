@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Butterfly</title>
-		<meta name="description" content="A minigame.">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="styles.css">
+		<style>
+			#canvas{
+				/* Needed, or else the canvas will look blurry*/
+				image-rendering:pixelated;
+
+				/* Makes the canvas bigger, but doesn't let it extend past the window's sides */
+				width:40em;
+				max-width:100%;
+			}
+		</style>
 	</head>
 	<body>
-		<main>
-			<header>
-				<h1>Butterfly</h1>
-				<div id="control-volume-settings">
-					<p>Volume</p>
-					<input id="control-volume" type="range" step=".05" value=".4" min="0" max="1">
-				</div>
-			</header>
-			<canvas id="canvas" width="90" height="90"></canvas>
-			<footer>
-				<div id="control-movement">
-					<div id="control-left" class="control"></div>
-					<div id="control-right" class="control"></div>
-				</div>
-				<div id="control-action" class="control"></div>
-			</footer>
-		</main>
-		<script src="game/engine.js"></script>
-		<script src="game/script.js"></script>
+		<canvas id="canvas" width="90" height="90"></canvas>
+		<p>Left and Right Arrows to move<p>
+		<p>Space to jump<p>
+		<script src="script.js"></script>
 	</body>
 </html>
