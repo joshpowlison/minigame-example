@@ -1,13 +1,11 @@
 # menigame-example
-An example of a web minigame built in JS and C compiled to WASM.
+A stripped-down minigame maded from the code I use for my minigames at https://joshpowlison.com/minigames
 
-I've adapted this from the code I use for my minigames at https://joshpowlison.com/minigames
+The goal is to help you learn how to create web games with compiled C.
 
-This is made primarily to help teach others how to make web games using C compiled to WASM.
-
-## Getting Started
-1. Download and install LLVM (go down to Pre-Built Binaries) https://releases.llvm.org/download.html#11.0.1
-	- When installing, add LLVM to the system PATH for all users
+## Compiling C to WASM (Windows)
+1. Download and install LLVM (when installing, add LLVM to the system PATH for all users). To make it easy, go down to "Pre-Built Binaries" and and get the "Windows (64-bit)" version from this page: https://releases.llvm.org/download.html#11.0.1
 	
-2. Run XAMPP or other webhost software supporting PHP
+2. In the console, in the same folder as the game, run `clang --target=wasm32 -Os -flto -nostdlib -std=c99 -Wl,--no-entry -Wl,--export-all -o script.wasm script.c` (You could replace the -std with a version of C++, and remove -Os, which does strong compression; these are just the settings I'm using right now)
 
+If it doesn't work, you'll get errors explaining why. Otherwise, if it works, clear your browser cache and refresh the game page to see the updates.

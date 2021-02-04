@@ -83,7 +83,7 @@ function onAnimationFrame(frameTimestamp) {
 	for(var i = 0, l = numberString.length; i < l; i ++){
 		CTX.drawImage(
 			SPRITE_SHEET
-			,7 + (parseInt(numberString[i]) * 4) + parseInt(numberString[i])
+			,(parseInt(numberString[i]) * 4) + parseInt(numberString[i])
 			,105
 			,4
 			,6
